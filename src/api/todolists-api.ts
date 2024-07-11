@@ -41,10 +41,10 @@ export const authAPI = {
         return instance.post<ResponseType<{userId : number}>>('auth/login', data);
     },
     logOut(){
-        return instance.post<any>('auth/login');
+        return instance.delete<ResponseType>('auth/login');
     },
     me(){
-        return instance.post<any>('auth/login');
+        return instance.get<ResponseType<userType>>('auth/me');
     },
 }
 
@@ -54,6 +54,11 @@ export type TodolistType = {
     title: string
     addedDate: string
     order: number
+}
+export type userType = {
+    id: number
+    email: string
+    login: string
 }
 export type ResponseType<D = {}> = {
     resultCode: number

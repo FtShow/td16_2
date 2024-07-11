@@ -1,6 +1,7 @@
 const initialState: InitialStateType = {
     status: 'idle',
-    error: null
+    error: null,
+    isInitiaziled: false
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -19,7 +20,8 @@ export type InitialStateType = {
     // происходит ли сейчас взаимодействие с сервером
     status: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
-    error: string | null
+    error: string | null,
+    isInitiaziled: boolean
 }
 
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
