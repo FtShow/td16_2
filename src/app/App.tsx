@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import './App.css'
-import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 import {useAppDispatch, useAppSelector} from './store'
 import {RequestStatusType} from './app-reducer'
 import AppBar from '@mui/material/AppBar';
@@ -12,21 +11,19 @@ import Container from '@mui/material/Container';
 import LinearProgress from '@mui/material/LinearProgress';
 import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
-import {Login} from "../features/Login/Login";
 import {Outlet} from "react-router";
 import {logOutTC, meTC} from "../features/Login/auth-reducer";
 
 
-
 function App() {
     const dispatch = useAppDispatch()
-    let isLoggedIn = useAppSelector(state=> state.auth.isLoggedIn);
+    let isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(meTC())
-    },[])
+    }, [])
 
-    let logOut = ()=>dispatch(logOutTC())
+    let logOut = () => dispatch(logOutTC())
 
 
     return (

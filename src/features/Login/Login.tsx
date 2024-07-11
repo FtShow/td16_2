@@ -25,21 +25,21 @@ type FormikErrorType = {
 }
 export const Login = () => {
     const dispatch = useAppDispatch()
-    let isLoggedIn = useAppSelector(state=> state.auth.isLoggedIn);
+    let isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
             rememberMe: false,
         },
-        validate: (values)=>{
+        validate: (values) => {
             const errors: FormikErrorType = {}
             if (!values.email) {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
-            if(!values.password){
+            if (!values.password) {
                 errors.password = 'Required password'
             }
             return errors
@@ -50,7 +50,7 @@ export const Login = () => {
         },
     })
 
-    if(isLoggedIn){
+    if (isLoggedIn) {
         return <Navigate to={'/todolists'}/>
     }
     return (
@@ -75,14 +75,16 @@ export const Login = () => {
                                 margin="normal"
                                 {...formik.getFieldProps('email')}
                             />
-                            {formik.errors.email && formik.touched.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
+                            {formik.errors.email && formik.touched.email ?
+                                <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
                             <TextField
                                 type="password"
                                 label="Password"
                                 margin="normal"
                                 {...formik.getFieldProps('password')}
                             />
-                            {formik.errors.password && formik.touched.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                            {formik.errors.password && formik.touched.password ?
+                                <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
                             <FormControlLabel label={'Remember me'} control={
                                 <Checkbox
                                     checked={formik.values.rememberMe}
