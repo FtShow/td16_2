@@ -34,6 +34,18 @@ export const todolistsAPI = {
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
         return instance.put<ResponseType<{ item: TaskType }>, AxiosResponse<ResponseType<{ item: TaskType }>>, UpdateTaskModelType>(`todo-lists/${todolistId}/tasks/${taskId}`, model);
     }
+
+}
+export const authAPI = {
+    login(data: any){
+        return instance.post<ResponseType<{userId : number}>>('auth/login', data);
+    },
+    logOut(){
+        return instance.post<any>('auth/login');
+    },
+    me(){
+        return instance.post<any>('auth/login');
+    },
 }
 
 // types
