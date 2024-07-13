@@ -13,18 +13,24 @@ import {Menu} from '@mui/icons-material';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar'
 import {Outlet} from "react-router";
 import {logOutTC, meTC} from "../features/Login/auth-reducer";
+import {CircularProgress} from "@mui/material";
 
 
 function App() {
     const dispatch = useAppDispatch()
     let isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+    let isInitialized = useAppSelector(state => state.app.isInitiaziled);
     const status = useAppSelector<RequestStatusType>((state) => state.app.status)
     useEffect(() => {
         dispatch(meTC())
     }, [])
 
     let logOut = () => dispatch(logOutTC())
-
+    if (!isInitialized) {
+        return <div style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
+        </div>
+    }
 
     return (
         <div className="App">

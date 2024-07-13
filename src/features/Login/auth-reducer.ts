@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux'
-import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType,} from '../../app/app-reducer'
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setisInitiaziledAC,} from '../../app/app-reducer'
 import {authAPI} from "../../api/todolists-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {LoginType} from "./Login";
@@ -71,11 +71,15 @@ export const meTC = () => (dispatch: Dispatch<ActionsType>) => {
         }).catch((e: any) => {
         handleServerNetworkError(e, dispatch)
     })
+        .finally(()=>{
+            dispatch(setisInitiaziledAC(true))
+        })
 
 }
 
 // types
 type ActionsType =
     | ReturnType<typeof setIsLoggedInAC>
+    | ReturnType<typeof setisInitiaziledAC>
     | SetAppStatusActionType
     | SetAppErrorActionType
