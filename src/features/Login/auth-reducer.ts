@@ -3,6 +3,7 @@ import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType, setisInit
 import {authAPI} from "../../api/todolists-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 import {LoginType} from "./Login";
+import {ClearDataType, clearTodosDataAC} from "../TodolistsList/todolists-reducer";
 
 const initialState = {
     isLoggedIn: false,
@@ -48,6 +49,7 @@ export const logOutTC = () => (dispatch: Dispatch<ActionsType>) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsLoggedInAC(true))
                 dispatch(setAppStatusAC('succeeded'))
+                dispatch(clearTodosDataAC())
             } else {
                 handleServerAppError(res.data, dispatch)
             }
@@ -71,7 +73,7 @@ export const meTC = () => (dispatch: Dispatch<ActionsType>) => {
         }).catch((e: any) => {
         handleServerNetworkError(e, dispatch)
     })
-        .finally(()=>{
+        .finally(() => {
             dispatch(setisInitiaziledAC(true))
         })
 
@@ -83,3 +85,4 @@ type ActionsType =
     | ReturnType<typeof setisInitiaziledAC>
     | SetAppStatusActionType
     | SetAppErrorActionType
+    | ClearDataType
